@@ -10,61 +10,44 @@ router
   .get("/", (context) => {
     context.response.body = "Welcome to dinosaur API!";
   })
-  .get("/youtube/search/", async (context) => {
-    if (context?.request?.url?.searchParams) {
-      const query = context.request.url.searchParams.get('query');
-      if (query) {
-        const results = await youtube.search(query);
-        context.response.body = results;
-      }
+  .get("/youtube/search/:query", async (context) => {
+    if (context?.params?.query) {
+      const results = await youtube.search(context.params.query);
+      context.response.body = results;
     }
   })
-  .get("/youtube/video/", async (context) => {
-    if (context?.request?.url?.searchParams) {
-      const id = context.request.url.searchParams.get('id');
-      if (id) {
-        const videoInfo = await youtube.getBasicInfo(id);
-        context.response.body = videoInfo;
-      }
+  .get("/youtube/video/:id", async (context) => {
+    if (context?.params?.id) {
+      const videoInfo = await youtube.getBasicInfo(context.params.id);
+      context.response.body = videoInfo;
     }
-  }).get("/youtube/comments/", async (context) => {
-    if (context?.request?.url?.searchParams) {
-      const id = context.request.url.searchParams.get('id');
-      if (id) {
-        const comments = await youtube.getComments(id);
-        context.response.body = comments;
-      }
+  }).get("/youtube/comments/:id", async (context) => {
+    if (context?.params?.id) {
+      const comments = await youtube.getComments(context.params.id);
+      context.response.body = comments;
     }
-  }).get("/youtube/channel/", async (context) => {
-    if (context?.request?.url?.searchParams) {
-      const id = context.request.url.searchParams.get('id');
-      if (id) {
-        const channelInfo = await youtube.getChannel(id);
-        context.response.body = channelInfo;
-      }
+  }).get("/youtube/channel/:id", async (context) => {
+    if (context?.params?.id) {
+      const channelInfo = await youtube.getChannel(context.params.id);
+      context.response.body = channelInfo;
     }
-  }).get("/youtube/playlist/", async (context) => {
-    if (context?.request?.url?.searchParams) {
-      const id = context.request.url.searchParams.get('id');
-      if (id) {
-        const playlistInfo = await youtube.getPlaylist(id);
-        context.response.body = playlistInfo;
-      }
+  }).get("/youtube/playlist/:id", async (context) => {
+    if (context?.params?.id) {
+      const playlistInfo = await youtube.getPlaylist(context.params.id);
+      context.response.body = playlistInfo;
     }
-  }).get("/youtube/advanced/", async (context) => {
-    if (context?.request?.url?.searchParams) {
-      const id = context.request.url.searchParams.get('id');
-      if (id) {
-        const basicInfo = await youtube.getBasicInfo(id);
-        const comments = await youtube.getComments(id);
-        const videoInfo = await youtube.getInfo(id);
+  }).get("/youtube/advanced/:id", async (context) => {
+    if (context?.params?.id) {
+      const videoId = context.params.id;
+      const basicInfo = await youtube.getBasicInfo(videoId);
+      const comments = await youtube.getComments(videoId);
+      const videoInfo = await youtube.getInfo(videoId);
 
-        context.response.body = {
-          basicInfo,
-          comments,
-          videoInfo
-        };
-      }
+      context.response.body = {
+        basicInfo,
+        comments,
+        videoInfo
+      };
     }
   })
 
