@@ -10,7 +10,7 @@ router
   .get("/", (context) => {
     context.response.body = "Welcome to dinosaur API!";
   })
-  .get("/youtube/search", async (context) => {
+  .get("/youtube/search/", async (context) => {
     if (context?.request?.url?.searchParams) {
       const query = context.request.url.searchParams.get('query');
       if (query) {
@@ -19,7 +19,7 @@ router
       }
     }
   })
-  .get("/youtube/video", async (context) => {
+  .get("/youtube/video/", async (context) => {
     if (context?.request?.url?.searchParams) {
       const id = context.request.url.searchParams.get('id');
       if (id) {
@@ -27,7 +27,7 @@ router
         context.response.body = videoInfo;
       }
     }
-  }).get("/youtube/comments", async (context) => {
+  }).get("/youtube/comments/", async (context) => {
     if (context?.request?.url?.searchParams) {
       const id = context.request.url.searchParams.get('id');
       if (id) {
@@ -35,7 +35,7 @@ router
         context.response.body = comments;
       }
     }
-  }).get("/youtube/channel", async (context) => {
+  }).get("/youtube/channel/", async (context) => {
     if (context?.request?.url?.searchParams) {
       const id = context.request.url.searchParams.get('id');
       if (id) {
@@ -43,7 +43,7 @@ router
         context.response.body = channelInfo;
       }
     }
-  }).get("/youtube/playlist", async (context) => {
+  }).get("/youtube/playlist/", async (context) => {
     if (context?.request?.url?.searchParams) {
       const id = context.request.url.searchParams.get('id');
       if (id) {
@@ -51,7 +51,7 @@ router
         context.response.body = playlistInfo;
       }
     }
-  }).get("/youtube/advanced", async (context) => {
+  }).get("/youtube/advanced/", async (context) => {
     if (context?.request?.url?.searchParams) {
       const id = context.request.url.searchParams.get('id');
       if (id) {
