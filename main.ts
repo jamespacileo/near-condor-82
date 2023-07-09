@@ -19,7 +19,7 @@ router
   .get("/youtube/video/:id", async (context) => {
     if (context?.params?.id) {
       const videoInfo = await youtube.getBasicInfo(context.params.id);
-      context.response.body = videoInfo;
+      context.response.body = JSON.stringify(videoInfo);
     }
   }).get("/youtube/comments/:id", async (context) => {
     if (context?.params?.id) {
